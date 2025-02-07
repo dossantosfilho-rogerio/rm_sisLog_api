@@ -35,5 +35,19 @@ class ItemVenda extends Model
         static::saving(function ($itemVenda) {
             $itemVenda->total = $itemVenda->quantidade * $itemVenda->preco_unitario;
         });
+    
+   
+        // Criar comissão automaticamente após a venda ser criada
+        static::created(function ($itemVenda) {
+            $percentual = $itemVenda->produto->percentual_comissao; // Percentual de comissão fixo, pode ser dinâmico
+            $valorComissao = ($itemVenda->total * $percentual) / 100;
+            \App\Models\Comissao::create([
+                'vendedores_id' => $itemVenda->venda->vendedores_id,
+                'item_venda_id' => $itemVenda->id,
+                'percentual_comissao' => $percentual,
+                'valor' => $valorComissao,
+            ]);
+        });
+
     }
 }

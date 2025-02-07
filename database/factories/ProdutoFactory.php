@@ -14,7 +14,9 @@ class ProdutoFactory extends Factory
         return [
             'nome' => $this->faker->word,
             'descricao' => $this->faker->sentence,
-            'preco' => $this->faker->randomFloat(2, 1, 500),
+            'preco_venda' => $this->faker->randomFloat(2, 1, 500),
+            'preco_custo' => $this->faker->randomFloat(2, 1, 500),
+            'percentual_comissao' => $this->faker->randomFloat(2, 1, 500),
             'estoque' => $this->faker->randomNumber(2),
             'categoria_id' => Categoria::factory(),
         ];

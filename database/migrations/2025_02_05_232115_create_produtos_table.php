@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->text('descricao')->nullable();
-            $table->decimal('preco', 10, 2);
-            $table->integer('estoque');
+            $table->decimal('preco_venda', 10, 2);
+            $table->decimal('preco_custo', 10, 2);
+            $table->decimal('percentual_comissao', 5, 2);
+            $table->integer('estoque')->default(0);
             $table->foreignId('categoria_id')->constrained()->restrictOnDelete();
             $table->timestamps();
         });
