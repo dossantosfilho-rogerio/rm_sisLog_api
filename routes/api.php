@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CompraController;
+use App\Http\Controllers\PessoaController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +13,7 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::middleware('auth:sanctum')->group(function () {
     // Rota para logout (revogar o token)
     Route::post('/logout', [UserController::class, 'logout']);
-
-
+    Route::get('/listProdutos', [ProdutoController::class, 'listProdutos']);
+    Route::get('/listCompras', [CompraController::class, 'listCompras']);
+    Route::get('/listPessoas', [PessoaController::class, 'listPessoas']);
 });
