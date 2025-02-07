@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vendas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cliente_id')->constrained()->restrictOnDelete();
+            $table->foreignId('pessoa_id')->constrained()->restrictOnDelete();
             $table->foreignId('vendedores_id')->constrained()->restrictOnDelete();
             $table->decimal('total', 10, 2);
             $table->date('data_venda');

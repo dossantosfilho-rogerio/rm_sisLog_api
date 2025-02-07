@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('fornecedor_id')->references('id')->on('fornecedores')->restrictOnDelete();
+                $table->foreignId('pessoa_id')->references('id')->on('pessoas')->restrictOnDelete();
                 $table->decimal('total', 10, 2);
                 $table->date('data_compra');
                 $table->timestamps();

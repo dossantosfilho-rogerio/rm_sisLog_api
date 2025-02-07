@@ -5,10 +5,9 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Categoria;
-use App\Models\Cliente;
+use App\Models\Pessoa;
 use App\Models\Compra;
 use App\Models\ContaAReceber;
-use App\Models\Fornecedor;
 use App\Models\ItemCompra;
 use App\Models\ItemVenda;
 use App\Models\Pagamento;
@@ -28,10 +27,10 @@ class ModelFeatureTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_cliente()
+    public function it_can_create_pessoa()
     {
-        $cliente = Cliente::factory()->create();
-        $this->assertDatabaseHas('clientes', ['id' => $cliente->id]);
+        $pessoa = Pessoa::factory()->create();
+        $this->assertDatabaseHas('pessoas', ['id' => $pessoa->id]);
     }
 
     /** @test */
@@ -46,13 +45,6 @@ class ModelFeatureTest extends TestCase
     {
         $conta = ContaAReceber::factory()->create();
         $this->assertDatabaseHas('contas_a_receber', ['id' => $conta->id]);
-    }
-
-    /** @test */
-    public function it_can_create_fornecedor()
-    {
-        $fornecedor = Fornecedor::factory()->create();
-        $this->assertDatabaseHas('fornecedores', ['id' => $fornecedor->id]);
     }
 
     /** @test */

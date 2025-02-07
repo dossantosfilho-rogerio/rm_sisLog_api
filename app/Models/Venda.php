@@ -10,19 +10,19 @@ class Venda extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cliente_id', // chave estrangeira
+        'pessoa_id', // chave estrangeira
         'vendedores_id', // chave estrangeira
         'data_venda',
         'total',
     ];
 
-    // Relacionamento de muitos para um com cliente
-    public function cliente()
+    // Relacionamento de muitos para um com pessoa
+    public function pessoa()
     {
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Pessoa::class);
     }
 
-    // Relacionamento de muitos para um com cliente
+    // Relacionamento de muitos para um com Vendedor
     public function vendedor()
     {
         return $this->belongsTo(Vendedor::class);

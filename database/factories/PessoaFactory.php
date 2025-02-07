@@ -1,12 +1,12 @@
 <?php
 namespace Database\Factories;
 
-use App\Models\Cliente;
+use App\Models\Pessoa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ClienteFactory extends Factory
+class PessoaFactory extends Factory
 {
-    protected $model = Cliente::class;
+    protected $model = Pessoa::class;
 
     public function definition()
     {

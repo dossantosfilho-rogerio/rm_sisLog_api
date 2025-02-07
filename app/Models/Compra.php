@@ -10,15 +10,15 @@ class Compra extends Model
     use HasFactory;
 
     protected $fillable = [
-        'fornecedor_id', // chave estrangeira
+        'pessoa_id', // chave estrangeira
         'total',
         'data_compra',
     ];
 
-    // Relacionamento de muitos para um com fornecedores
-    public function fornecedor()
+    // Relacionamento de muitos para um com pessoas
+    public function pessoa()
     {
-        return $this->belongsTo(Fornecedor::class);
+        return $this->belongsTo(Pessoa::class);
     }
 
     // Relacionamento de um para muitos com itens de compra
