@@ -119,6 +119,7 @@ class ModelFeatureTest extends TestCase
             $itemVenda = ItemVenda::create([
                 'venda_id' => Venda::factory()->create()->id,
                 'produto_id' => Produto::factory()->create()->id,
+                'percentual_comissao' => 5,
                 'quantidade' => $quantidade,
                 'preco_unitario' => $precoUnitario,
             ]);
@@ -128,31 +129,6 @@ class ModelFeatureTest extends TestCase
             $this->assertEquals($expectedTotal, $itemVenda->total);
         }
 
-
-        /** @test */
-        public function it_can_create_Comissao_on_insert_item_venda()
-        {
-            // Definindo dados de entrada
-            $quantidade = 10;
-            $precoUnitario = 5.50;
-            $venda = Venda::factory()->create();
-            $produto = Produto::factory()->create();
-            // Criando o itemVenda
-            $itemVenda = ItemVenda::create([
-                'venda_id' => $venda->id,
-                'produto_id' => $produto->id,
-                'quantidade' => $quantidade,
-                'preco_unitario' => $precoUnitario,
-            ]);
-    
-            // Verificando se a comissão foi inserida.
-            $this->assertDatabaseHas('comissoes', [
-                'vendedores_id' => $venda->vendedores_id,
-                'item_venda_id' => $venda->id,
-                'percentual_comissao' => $produto->percentual_comissao,
-                'valor' =>  ($itemVenda->total * $produto->percentual_comissao) / 100
-            ]);
-        }
     
         /** @test */
         public function it_calculates_total_on_update_item_venda()
@@ -161,6 +137,7 @@ class ModelFeatureTest extends TestCase
             $itemVenda = ItemVenda::create([
                 'venda_id' => Venda::factory()->create()->id,
                 'produto_id' => Produto::factory()->create()->id,
+                'percentual_comissao' => 0.05,
                 'quantidade' => 10,
                 'preco_unitario' => 5.50,
             ]);

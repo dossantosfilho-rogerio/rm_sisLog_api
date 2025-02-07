@@ -13,11 +13,13 @@ class ItemVendaFactory extends Factory
 
     public function definition()
     {
+        $produto = Produto::factory()->create();
         return [
             'venda_id' => Venda::factory(),
-            'produto_id' => Produto::factory(),
+            'produto_id' => $produto->id,
             'quantidade' => $this->faker->randomNumber(2),
-            'preco_unitario' => $this->faker->randomFloat(2, 1, 500),
+            'percentual_comissao' => $produto->percentual_comissao,
+            'preco_unitario' => $produto->preco_venda,
         ];
     }
 }

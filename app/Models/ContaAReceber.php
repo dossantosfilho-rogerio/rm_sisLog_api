@@ -33,6 +33,24 @@ class ContaAReceber extends Model
             self::STATUS_VENCIDO
         ];
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updated(function ($conta) {
+            if ($conta->status === self::STATUS_PAGO) {
+                Comissao::gerarComissao($conta);
+            }
+        });
+        static::created(function ($conta) {
+            if ($conta->status === self::STATUS_PAGO) {
+                Comissao::gerarComissao($conta);
+            }
+        });
+    
+    }
+
     // Constantes para status
     const STATUS_PENDENTE = 'pendente';
     const STATUS_PAGO = 'pago';
