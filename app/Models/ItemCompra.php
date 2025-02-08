@@ -35,6 +35,16 @@ class ItemCompra extends Model
         static::saving(function ($itemCompra) {
             $itemCompra->total = $itemCompra->quantidade * $itemCompra->preco_unitario;
         });
+
+        static::created(function ($itemCompra) {
+            MovimentacaoEstoque::create(
+                [
+                    'produto_id' => $itemCompra->produto_id,
+                    'quantidade' => $itemCompra->quantidade,
+                    'tipo' => MovimentacaoEstoque::TIPO_ENTRADA
+                ]
+                );
+        });
     }
 
 }

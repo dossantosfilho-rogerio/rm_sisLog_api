@@ -37,5 +37,13 @@ class ItemVenda extends Model
             $itemVenda->total = $itemVenda->quantidade * $itemVenda->preco_unitario;
         });
 
+        static::created(function ($itemVenda) {
+            MovimentacaoEstoque::create([
+                'produto_id' => $itemVenda->produto_id,
+                'quantidade' => $itemVenda->quantidade,
+                'tipo' => MovimentacaoEstoque::TIPO_SAIDA
+            ]);
+        });
+
     }
 }

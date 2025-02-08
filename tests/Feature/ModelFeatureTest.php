@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\MovimentacaoEstoque;
 use Tests\TestCase;
 use App\Models\Categoria;
 use App\Models\Pessoa;
@@ -24,6 +25,13 @@ class ModelFeatureTest extends TestCase
     {
         $categoria = Categoria::factory()->create();
         $this->assertDatabaseHas('categorias', ['id' => $categoria->id]);
+    }
+
+    /** @test */
+    public function it_can_create_movimentacao_estoque()
+    {
+        $movimentacao = MovimentacaoEstoque::factory()->create();
+        $this->assertDatabaseHas('movimentacoes_estoque', ['id' => $movimentacao->id]);
     }
 
     /** @test */
