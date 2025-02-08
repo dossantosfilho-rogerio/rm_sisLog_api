@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('movimentacoes_estoque', function (Blueprint $table) {
             $table->id();
             $table->foreignId('produto_id')->constrained('produtos')->onDelete('cascade');
+            $table->foreignId('item_venda_id')->nullable()->constrained('itens_venda')->restrictOnDelete();
+            $table->foreignId('item_compra_id')->nullable()->constrained('itens_compra')->restrictOnDelete();
             $table->integer('quantidade');
             $table->enum('tipo', ['entrada', 'saida']);
             $table->text('observacao')->nullable();
