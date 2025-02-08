@@ -21,4 +21,17 @@ class ProdutoController extends Controller
         return response()->json($produtos);
     }
 
+    public function listProdutosSelect(Request $request)
+    {
+        $limit = $request->input("limit",9);
+        $name = $request->input("search");
+        //$categoria = $request->input("categoria");
+        
+        $produtos = Produto::when($name, function ($query) use ($name) {
+            return $query->where('nome', 'like', "%{$name}%");
+        })->orderBy('nome')->limit($limit)->get(); // Retorna $limit produtos por página
+    
+        return response()->json($produtos);
+    }
+
 }

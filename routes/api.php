@@ -13,7 +13,12 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::middleware('auth:sanctum')->group(function () {
     // Rota para logout (revogar o token)
     Route::post('/logout', [UserController::class, 'logout']);
+    Route::post('/createCompra', [CompraController::class, 'createCompra']);
+
+
+    
     Route::get('/listProdutos', [ProdutoController::class, 'listProdutos']);
+    Route::get('/listProdutosSelect', [ProdutoController::class, 'listProdutosSelect']);
     Route::get('/listCompras', [CompraController::class, 'listCompras']);
     Route::get('/listPessoas', [PessoaController::class, 'listPessoas']);
 });
