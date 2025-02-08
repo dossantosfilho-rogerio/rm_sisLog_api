@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'cpf' => fake()->numerify('###.###.###-##'),
             'cpf_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
     }

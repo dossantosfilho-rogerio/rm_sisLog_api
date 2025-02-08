@@ -7,17 +7,18 @@ use App\Models\Pessoa;
 use App\Models\Funcionario;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class VendaFactory extends Factory
+class FuncionarioFactory extends Factory
 {
-    protected $model = Venda::class;
+    protected $model = Funcionario::class;
 
     public function definition()
     {
         return [
             'pessoa_id' => Pessoa::factory(),
-            'funcionario_id' => Funcionario::factory(),
-            'data_venda' => $this->faker->date(),
-            'total' => $this->faker->randomFloat(2, 100, 10000),
+            'data_admissao' => $this->faker->date(),
+            'data_demissao' => $this->faker->date(),
+            'tipo' => $this->faker->randomElement(Funcionario::getAllTipos()),
+
         ];
     }
 }

@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vendas', function (Blueprint $table) {
+        Schema::create('rotas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pessoa_id')->constrained()->restrictOnDelete();
             $table->foreignId('funcionario_id')->constrained()->restrictOnDelete();
-            $table->foreignId('rota_id')->nullable()->constrained()->restrictOnDelete();
-            $table->decimal('total', 10, 2);
-            $table->date('data_venda');
+            $table->string('placa_veiculo');
+            $table->string('titulo');
+            $table->text('descricao')->nullable();
+            $table->date('data_saida');
+            $table->date('data_retorno')->nullable();
+            $table->enum('status', ['aguardando','em rota', 'retornado'])->default('aguardando');
             $table->timestamps();
-            });
+        });
     }
 
     /**
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vendas');
+        Schema::dropIfExists('rotas');
     }
 };

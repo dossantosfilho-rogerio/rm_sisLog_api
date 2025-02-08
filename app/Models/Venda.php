@@ -11,7 +11,8 @@ class Venda extends Model
 
     protected $fillable = [
         'pessoa_id', // chave estrangeira
-        'vendedores_id', // chave estrangeira
+        'funcionario_id', // chave estrangeira
+        'rota_id',
         'data_venda',
         'total',
     ];
@@ -22,22 +23,26 @@ class Venda extends Model
         return $this->belongsTo(Pessoa::class);
     }
 
-    // Relacionamento de muitos para um com Vendedor
-    public function vendedor()
+    // Relacionamento de muitos para um com Funcionario
+    public function funcionario()
     {
-        return $this->belongsTo(Vendedor::class);
+        return $this->belongsTo(Funcionario::class);
+    }
+
+    public function rota()
+    {
+        return $this->belongsTo(Rota::class);
     }
 
 
-    // Relacionamento de um para muitos com itens de venda
+    // Relacionamento de um para muitos
     public function itensVenda()
     {
         return $this->hasMany(ItemVenda::class);
     }
 
-    // Relacionamento de um para um com conta a receber
     public function contaAReceber()
     {
-        return $this->hasOne(ContaAReceber::class);
+        return $this->hasMany(ContaAReceber::class);
     }
 }

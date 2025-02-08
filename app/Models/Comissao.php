@@ -8,11 +8,11 @@ class Comissao extends Model
 {
     use HasFactory;
     protected $table = 'comissoes';
-    protected $fillable = ['vendedores_id', 'item_venda_id', 'conta_a_receber_id', 'percentual_comissao', 'valor'];
+    protected $fillable = ['funcionario_id', 'item_venda_id', 'conta_a_receber_id', 'percentual_comissao', 'valor'];
 
-    public function vendedor()
+    public function funcionario()
     {
-        return $this->belongsTo(Vendedor::class);
+        return $this->belongsTo(Funcionario::class);
     }
 
     public function itemVenda()
@@ -42,7 +42,7 @@ class Comissao extends Model
 
             // Criar a comissão proporcional apenas se ainda não foi gerada para esta conta e item
             Comissao::create([
-                'vendedores_id' => $venda->vendedores_id,
+                'funcionario_id' => $venda->funcionario_id,
                 'item_venda_id' => $item->id,
                 'conta_a_receber_id' => $contaAReceber->id,
                 'percentual_comissao' => $item->percentual_comissao,

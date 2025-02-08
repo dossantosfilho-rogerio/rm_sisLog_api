@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Rota;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\MovimentacaoEstoque;
 use Tests\TestCase;
@@ -25,6 +26,14 @@ class ModelFeatureTest extends TestCase
     {
         $categoria = Categoria::factory()->create();
         $this->assertDatabaseHas('categorias', ['id' => $categoria->id]);
+    }
+
+
+    /** @test */
+    public function it_can_create_rota()
+    {
+        $rota = Rota::factory()->create();
+        $this->assertDatabaseHas('rotas', ['id' => $rota->id]);
     }
 
     /** @test */

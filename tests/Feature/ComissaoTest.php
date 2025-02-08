@@ -84,7 +84,7 @@ class ComissaoTest extends TestCase
             // Verificando se a comissão foi inserida.
             
             $this->assertDatabaseHas('comissoes', [
-                'vendedores_id' => $venda->vendedores_id,
+                'funcionario_id' => $venda->funcionario_id,
                 'item_venda_id' => $itemVenda1->id,
                 'conta_a_receber_id' => $conta2->id,
                 'percentual_comissao' => $itemVenda1->percentual_comissao,

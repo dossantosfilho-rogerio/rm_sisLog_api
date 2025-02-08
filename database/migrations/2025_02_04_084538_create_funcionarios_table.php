@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vendedores', function (Blueprint $table) {
+        Schema::create('funcionarios', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
+            $table->foreignId('pessoa_id')->constrained()->restrictOnDelete();
+            $table->date('data_admissao');
+            $table->date('data_demissao')->nullable();
+            $table->enum('tipo', ['administrativo', 'vendedor', 'entregador']);
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vendedores');
+        Schema::dropIfExists('funcionarios');
     }
 };
