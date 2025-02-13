@@ -12,11 +12,24 @@ class PessoaController extends Controller
     {
         $limit = $request->input("limit",9);
         $search = $request->input("search");
+        $cpfcnpj = $request->input("cpfcnpj");
+        $nome = $request->input("nome");
         //$categoria = $request->input("categoria");
         
-        $pessoas = Pessoa::when($search, function ($query) use ($search) {
-            return $query->where('nome', 'like', "%{$search}%");
-        })->orderBy('nome')->get();
+        if($search){
+            $pessoas = Pessoa::when($search, function ($query) use ($search) {
+                return $query->where('nome', 'like', "%{$search}%");
+            })
+            ->orderBy('nome')->get();    
+        } else {
+            $pessoas = Pessoa::when($nome, function ($query) use ($nome) {
+                return $query->where('nome', 'like', "%{$nome}%");
+            })->when($cpfcnpj, function($query) use ($cpfcnpj) {
+                return $query->where('cpfcnpj', 'like', "%{$cpfcnpj}%");
+            })
+            ->orderBy('nome')->get();    
+
+        }
 
         return response()->json($pessoas);
     }

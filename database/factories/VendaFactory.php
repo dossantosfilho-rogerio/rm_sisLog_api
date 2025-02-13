@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Rota;
 use App\Models\Venda;
 use App\Models\Pessoa;
 use App\Models\Funcionario;
@@ -16,6 +17,7 @@ class VendaFactory extends Factory
         return [
             'pessoa_id' => Pessoa::factory(),
             'funcionario_id' => Funcionario::factory(),
+            'rota_id' => Rota::factory(),
             'data_venda' => $this->faker->date(),
             'total' => $this->faker->randomFloat(2, 100, 10000),
         ];
