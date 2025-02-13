@@ -34,4 +34,17 @@ class PessoaController extends Controller
         return response()->json($pessoas);
     }
 
+
+
+    public function createPessoa(Request $request){
+        try{
+            $inputs = $request->all();
+            $pessoa = Pessoa::create($inputs);
+            return response()->json($pessoa);
+        } catch (Exception $e) {
+            return response()->json(['Erro ao cadastrar a pessoa.'], 400);
+        }
+    }
+
+
 }

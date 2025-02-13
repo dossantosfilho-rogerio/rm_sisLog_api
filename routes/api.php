@@ -14,6 +14,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Rota para logout (revogar o token)
     Route::post('/logout', [UserController::class, 'logout']);
     Route::post('/createCompra', [CompraController::class, 'createCompra']);
+    Route::post('/createPessoa', [PessoaController::class, 'createPessoa']);
 
 
     
