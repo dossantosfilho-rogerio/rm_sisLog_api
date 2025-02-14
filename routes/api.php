@@ -15,7 +15,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [UserController::class, 'logout']);
     Route::post('/createCompra', [CompraController::class, 'createCompra']);
     Route::post('/createPessoa', [PessoaController::class, 'createPessoa']);
-
+    Route::post('/createProduto', [ProdutoController::class, 'createProduto']);
 
     
     Route::get('/listProdutos', [ProdutoController::class, 'listProdutos']);
