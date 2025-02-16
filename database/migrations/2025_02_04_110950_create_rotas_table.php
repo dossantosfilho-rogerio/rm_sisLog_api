@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rotas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('funcionario_id')->constrained()->restrictOnDelete();
+            $table->foreignId('pessoa_id')->constrained();
             $table->string('placa_veiculo');
             $table->string('titulo');
             $table->text('descricao')->nullable();

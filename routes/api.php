@@ -4,7 +4,9 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\RotaController;
 use App\Http\Controllers\UserController;
+use App\Models\Rota;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [UserController::class, 'login'])->name('login');
@@ -18,7 +20,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/createPessoa', [PessoaController::class, 'createPessoa']);
     Route::post('/createProduto', [ProdutoController::class, 'createProduto']);
     Route::post('/createCategoria', [CategoriaController::class, 'createCategoria']);
+    Route::post('/createRota', [RotaController::class, 'createRota']);
 
+    Route::get('/listRotas', [RotaController::class, 'listRotas']);
     Route::get('/listProdutos', [ProdutoController::class, 'listProdutos']);
     Route::get('/listProdutosSelect', [ProdutoController::class, 'listProdutosSelect']);
     Route::get('/listCompras', [CompraController::class, 'listCompras']);

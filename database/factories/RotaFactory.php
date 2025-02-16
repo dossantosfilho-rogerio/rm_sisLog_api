@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Pessoa;
 use App\Models\Rota;
 use App\Models\Funcionario;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -13,7 +14,7 @@ class RotaFactory extends Factory
     public function definition()
     {
         return [
-            'funcionario_id' => Funcionario::factory(),
+            'pessoa_id' => Pessoa::factory(),
             'placa_veiculo' => $this->faker->word(),
             'titulo' => $this->faker->word(),
             'descricao' => $this->faker->sentence(),
