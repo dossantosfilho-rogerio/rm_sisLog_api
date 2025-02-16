@@ -13,11 +13,14 @@ class RotaController extends Controller
     {
         $limit = $request->input("limit",9);
         $titulo = $request->input("titulo");
-        //$categoria = $request->input("categoria");
+        $data_saida = $request->input("data_saida");
         
         $rotas = Rota::when($titulo, function ($query) use ($titulo) {
             return $query->where('titulo', 'like', "%{$titulo}%");
-        })->orderBy('titulo')->paginate($limit); // Retorna $limit produtos por página
+        })->when($data_saida, function ($query) use ($data_saida) {
+            return $query->where('data_saida', $data_saida);
+        })->withCount('vendas')
+        ->orderBy('titulo')->paginate($limit); // Retorna $limit produtos por página
     
         return response()->json($rotas);
     }

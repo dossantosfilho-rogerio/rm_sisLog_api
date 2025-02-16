@@ -10,7 +10,7 @@ class Rota extends Model
     use HasFactory;
 
     protected $fillable = [
-        'funcionario_id',
+        'pessoa_id',
         'placa_veiculo',
         'titulo',
         'descricao',
