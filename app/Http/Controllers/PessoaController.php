@@ -23,9 +23,9 @@ class PessoaController extends Controller
             ->orderBy('nome')->get();    
         } else {
             $pessoas = Pessoa::when($nome, function ($query) use ($nome) {
-                return $query->where('nome', 'like', "%{$nome}%");
+                $query->where('nome', 'like', "%{$nome}%");
             })->when($cpfcnpj, function($query) use ($cpfcnpj) {
-                return $query->where('cpfcnpj', 'like', "%{$cpfcnpj}%");
+                    $query->where('cpfcnpj', 'like', "%{$cpfcnpj}%");
             })
             ->orderBy('nome')->get();    
 

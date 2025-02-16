@@ -41,7 +41,7 @@ class ProdutoController extends Controller
             $pessoa = Produto::create($inputs);
             return response()->json($pessoa);
         } catch (Exception $e) {
-            return response()->json(['Erro ao cadastrar o produto.'], 400);
+            return response()->json(['Erro ao cadastrar o produto.'. $e->getMessage()], 400);
         }
     }
 
