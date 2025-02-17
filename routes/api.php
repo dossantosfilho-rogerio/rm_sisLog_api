@@ -6,6 +6,7 @@ use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\RotaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendaController;
 use App\Models\Rota;
 use Illuminate\Support\Facades\Route;
 
@@ -21,8 +22,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/createProduto', [ProdutoController::class, 'createProduto']);
     Route::post('/createCategoria', [CategoriaController::class, 'createCategoria']);
     Route::post('/createRota', [RotaController::class, 'createRota']);
+    Route::post('/createVenda', [VendaController::class, 'createVenda']);
 
+    Route::get('/listVendas', [VendaController::class, 'listVendas']);
     Route::get('/listRotas', [RotaController::class, 'listRotas']);
+    Route::get('/listRotasSelect', [RotaController::class, 'listRotasSelect']);
     Route::get('/listProdutos', [ProdutoController::class, 'listProdutos']);
     Route::get('/listProdutosSelect', [ProdutoController::class, 'listProdutosSelect']);
     Route::get('/listCompras', [CompraController::class, 'listCompras']);

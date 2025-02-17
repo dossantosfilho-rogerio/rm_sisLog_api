@@ -10,23 +10,23 @@ class Venda extends Model
     use HasFactory;
 
     protected $fillable = [
-        'pessoa_id', // chave estrangeira
-        'funcionario_id', // chave estrangeira
+        'cliente_id', // chave estrangeira
+        'vendedor_id', // chave estrangeira
         'rota_id',
         'data_venda',
         'total',
     ];
 
     // Relacionamento de muitos para um com pessoa
-    public function pessoa()
+    public function cliente()
     {
-        return $this->belongsTo(Pessoa::class);
+        return $this->belongsTo(Pessoa::class, 'cliente_id', 'id');
     }
 
     // Relacionamento de muitos para um com Funcionario
-    public function funcionario()
+    public function vendedor()
     {
-        return $this->belongsTo(Funcionario::class);
+        return $this->belongsTo(Pessoa::class, 'id', 'vendedor_id');
     }
 
     public function rota()
