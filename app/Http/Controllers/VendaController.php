@@ -27,6 +27,18 @@ class VendaController extends Controller
         return response()->json($vendas);
     }
 
+    public function existVenda(Request $request)
+    {
+        $numero_documento = $request->input("numero_documento");
+
+        $venda = Venda::when($numero_documento, function ($query) use ($numero_documento) {
+            $query->where('numero_documento', $numero_documento);
+        })
+        ->first();
+        return $venda? true : false;
+        //return response()->json($venda);
+    }
+
     public function createVenda(Request $request){
         try{
             $itens_venda = $request->get('produtos');
@@ -39,6 +51,7 @@ class VendaController extends Controller
                 'cliente_id' => $request->get('cliente_id'),
                 'vendedor_id' => $request->get('vendedor_id'),
                 'rota_id' => $request->get('rota_id'),
+                'numero_documento' => $request->get('numero_documento'),
                 'data_venda' => $request->get('data_venda'),
                 'total' => $total
             ]);
