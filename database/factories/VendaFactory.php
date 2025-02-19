@@ -15,9 +15,10 @@ class VendaFactory extends Factory
     public function definition()
     {
         return [
-            'fornecedor_id' => Pessoa::factory(),
+            'cliente_id' => Pessoa::factory(),
             'vendedor_id' => Pessoa::factory(),
             'rota_id' => Rota::factory(),
+            'numero_documento' => $this->faker->randomFloat(2, 100, 10000),
             'data_venda' => $this->faker->date(),
             'total' => $this->faker->randomFloat(2, 100, 10000),
         ];

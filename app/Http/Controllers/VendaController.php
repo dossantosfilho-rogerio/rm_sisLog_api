@@ -20,7 +20,7 @@ class VendaController extends Controller
 
         $vendas = Venda::with('cliente:id,nome','itensVenda:id,venda_id,produto_id,quantidade,total,preco_unitario', 'itensVenda.produto:id,nome')
         ->when($numero_documento, function ($query) use ($numero_documento) {
-            $query->where('id', $numero_documento);
+            $query->where('numero_documento', '%'.$numero_documento.'%');
         })
         ->paginate($limit);
     

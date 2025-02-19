@@ -10,7 +10,8 @@ class Compra extends Model
     use HasFactory;
 
     protected $fillable = [
-        'pessoa_id', // chave estrangeira
+        'pessoa_id',
+        'numero_nota',
         'total',
         'data_compra',
     ];

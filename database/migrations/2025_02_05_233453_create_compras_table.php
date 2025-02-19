@@ -15,6 +15,7 @@ return new class extends Migration
                 $table->id();
                 $table->foreignId('pessoa_id')->references('id')->on('pessoas')->restrictOnDelete();
                 $table->decimal('total', 10, 2);
+                $table->string('numero_nota');
                 $table->date('data_compra');
                 $table->timestamps();
             });

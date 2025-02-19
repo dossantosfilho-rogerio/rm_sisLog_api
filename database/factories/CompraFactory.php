@@ -16,6 +16,7 @@ class CompraFactory extends Factory
         return [
             'pessoa_id' => Pessoa::factory(),
             'data_compra' => $this->faker->date('Y-m-d'),
+            'numero_nota' => $this->faker->randomFloat(2, 100, 10000),
             'total' => $this->faker->randomFloat(2, 100, 10000),
         ];
     }

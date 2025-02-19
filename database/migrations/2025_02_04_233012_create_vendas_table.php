@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('cliente_id')->constrained('pessoas')->restrictOnDelete();
             $table->foreignId('vendedor_id')->constrained('pessoas')->restrictOnDelete();
             $table->foreignId('rota_id')->nullable()->constrained()->restrictOnDelete();
+            $table->string('numero_documento');
             $table->decimal('total', 10, 2);
             $table->date('data_venda');
             $table->timestamps();

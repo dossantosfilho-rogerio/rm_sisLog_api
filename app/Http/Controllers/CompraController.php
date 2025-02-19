@@ -22,7 +22,7 @@ class CompraController extends Controller
             $query->where('pessoa_id', $fornecedor_id);
         })
         ->when($numero_documento, function ($query) use ($numero_documento) {
-            $query->where('id', $numero_documento);
+            $query->where('numero_nota', '%'.$numero_documento.'%');
         })
         ->paginate($limit);
     

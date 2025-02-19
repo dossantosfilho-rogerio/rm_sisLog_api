@@ -13,6 +13,7 @@ class Venda extends Model
         'cliente_id', // chave estrangeira
         'vendedor_id', // chave estrangeira
         'rota_id',
+        'numero_documento',
         'data_venda',
         'total',
     ];
