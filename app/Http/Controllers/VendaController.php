@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContaAReceber;
 use App\Models\Produto;
 use App\Models\Venda;
 use App\Models\ItemVenda;
@@ -42,6 +43,7 @@ class VendaController extends Controller
     public function createVenda(Request $request){
         try{
             $itens_venda = $request->get('produtos');
+            $contas_a_receber = $request->get('contasAReceber');
             $total = 0;
             foreach ($itens_venda as $key => $item) {
                 $total += $item['quantidade'] * $item['preco_unitario'];
@@ -64,6 +66,20 @@ class VendaController extends Controller
                     'preco_unitario' => $item['preco_unitario'],
                     'quantidade' => $item['quantidade'],
                     'percentual_comissao' => Produto::findOrFail($item['produto_id'])->percentual_comissao
+                ]);
+            }
+
+            foreach ($contas_a_receber as $item){
+                if(strtotime($item['data_vencimento']) < strtotime(date('Y-m-d'))){
+                    $item['status'] = ContaAReceber::STATUS_VENCIDO;
+                } else {
+                    $item['status'] = ContaAReceber::STATUS_PENDENTE;
+                }
+                ContaAReceber::create([
+                    'venda_id' => $venda->id,
+                    'valor' => $item['valor'],
+                    'data_vencimento' => $item['data_vencimento'],
+                    'status' => $item['status']
                 ]);
             }
             DB::commit();
