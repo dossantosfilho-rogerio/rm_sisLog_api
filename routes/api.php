@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\CompraController;
+use App\Http\Controllers\ContasAReceberController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\RotaController;
@@ -36,6 +37,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/listPessoas', [PessoaController::class, 'listPessoas']);
     Route::get('/listCategorias', [CategoriaController::class, 'listCategorias']);
     Route::get('/listCategoriasSelect', [CategoriaController::class, 'listCategoriasSelect']);
-
+    Route::get('/listContasAReceberAbertos', [ContasAReceberController::class, 'listContasAReceberAbertos']);
 
 });
