@@ -39,6 +39,7 @@ class CompraController extends Controller
             DB::beginTransaction();
             $compra = Compra::create([
                 'pessoa_id' => $request->get('pessoa_id'),
+                'numero_nota' => $request->get('numero_nota'),
                 'data_compra' => $request->get('data_compra'),
                 'total' => $total
             ]);
@@ -56,8 +57,21 @@ class CompraController extends Controller
             return response()->json($compra);
         } catch (Exception $e) {
             DB::rollBack();
-            return response()->json(['Erro ao cadastrar a compra.'], 400);
+            return response()->json(['Erro ao cadastrar a compra.'. $e->getMessage()], 400);
         }
     }
+
+    public function existCompra(Request $request)
+    {
+        $numero_nota = $request->input("numero_nota");
+
+        $compra = Compra::when($numero_nota, function ($query) use ($numero_nota) {
+            $query->where('numero_nota', $numero_nota);
+        })
+        ->first();
+        return $compra? true : false;
+        //return response()->json($compra);
+    }
+
 
 }
