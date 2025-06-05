@@ -18,9 +18,9 @@ class UserController extends Controller
         ]);
 
         $user = User::where('cpf', $request->cpf)->first();
-
+        
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['message' => 'Credenciais inválidas'], 401);
+            return response()->json(['message' => Hash::make($request->password)], 401);
         }
 
         return response()->json([

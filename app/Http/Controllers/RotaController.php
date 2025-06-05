@@ -25,6 +25,20 @@ class RotaController extends Controller
         return response()->json($rotas);
     }
 
+    public function getRota(Request $request)
+    {
+        try{
+            $id = $request->input("id");
+            
+            $rota = Rota::findOrFail($id); // Retorna $limit produtos por página
+        
+            return response()->json($rota);
+
+        } catch (Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
     public function listRotasSelect(Request $request)
     {
         $limit = $request->input("limit",9);

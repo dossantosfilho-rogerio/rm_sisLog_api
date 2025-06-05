@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/createProduto', [ProdutoController::class, 'createProduto']);
     Route::post('/createCategoria', [CategoriaController::class, 'createCategoria']);
     Route::post('/createRota', [RotaController::class, 'createRota']);
+
     Route::post('/createVenda', [VendaController::class, 'createVenda']);
 
     Route::get('/existVenda', [VendaController::class, 'existVenda']);
@@ -30,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/listVendas', [VendaController::class, 'listVendas']);
     Route::get('/listRotas', [RotaController::class, 'listRotas']);
+    Route::get('/getRota', [RotaController::class, 'getRota']);
     Route::get('/listRotasSelect', [RotaController::class, 'listRotasSelect']);
     Route::get('/listProdutos', [ProdutoController::class, 'listProdutos']);
     Route::get('/listProdutosSelect', [ProdutoController::class, 'listProdutosSelect']);
