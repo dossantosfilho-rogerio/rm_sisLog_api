@@ -19,8 +19,8 @@ class Rota extends Model
         'status',
     ];
 
-    public function funcionario(){
-        return $this->belongsTo(Funcionario::class);
+    public function Pessoa(){
+        return $this->belongsTo(Pessoa::class);
     }
 
     // Relacionamento de um para muitos com produtos

@@ -18,10 +18,13 @@ class VendaController extends Controller
         $limit = $request->input("limit",9);
         $numero_documento = $request->input("numero_documento");
         $fornecedor_id = $request->input("fornecedor_id");
+        $rota_id = $request->input("rota_id");
 
         $vendas = Venda::with('cliente:id,nome','itensVenda:id,venda_id,produto_id,quantidade,total,preco_unitario', 'itensVenda.produto:id,nome')
         ->when($numero_documento, function ($query) use ($numero_documento) {
             $query->where('numero_documento', '%'.$numero_documento.'%');
+        })->when($rota_id, function($query) use ($rota_id){
+            $query->where('rota_id', $rota_id);
         })
         ->paginate($limit);
     

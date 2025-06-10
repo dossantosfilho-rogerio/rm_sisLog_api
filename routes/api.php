@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/createProduto', [ProdutoController::class, 'createProduto']);
     Route::post('/createCategoria', [CategoriaController::class, 'createCategoria']);
     Route::post('/createRota', [RotaController::class, 'createRota']);
+    Route::post('/updateRota', [RotaController::class, 'updateRota']);
 
     Route::post('/createVenda', [VendaController::class, 'createVenda']);
 

@@ -30,7 +30,7 @@ class RotaController extends Controller
         try{
             $id = $request->input("id");
             
-            $rota = Rota::findOrFail($id); // Retorna $limit produtos por página
+            $rota = Rota::with('Pessoa')->findOrFail($id); // Retorna $limit produtos por página
         
             return response()->json($rota);
 
@@ -59,6 +59,18 @@ class RotaController extends Controller
             return response()->json($rota);
         } catch (Exception $e) {
             return response()->json(['Erro ao cadastrar a rota.'. $e->getMessage()], 400);
+        }
+    }
+
+    public function updateRota(Request $request){
+        try{
+            $inputs = $request->all();
+            $id = $inputs['id'];
+            unset($inputs['id']);
+            $rota = Rota::updateOrCreate(['id'=>$id], $inputs);
+            return response()->json($rota);
+        } catch (Exception $e) {
+            return response()->json(['Erro ao atualizar a rota.'. $e->getMessage()], 400);
         }
     }
 
