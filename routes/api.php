@@ -12,7 +12,9 @@ use App\Models\Rota;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [UserController::class, 'login'])->name('login');
-
+Route::get('/ping', function (Request $request) {
+    return response()->json(['status' => 'API online']);
+});
 
 // Rotas protegidas com auth:sanctum, ou seja, possuem token
 Route::middleware('auth:sanctum')->group(function () {
