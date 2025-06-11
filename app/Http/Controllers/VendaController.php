@@ -24,7 +24,7 @@ class VendaController extends Controller
         ->when($numero_documento, function ($query) use ($numero_documento) {
             $query->where('numero_documento', '%'.$numero_documento.'%');
         })->when($rota_id, function($query) use ($rota_id){
-            $query->where('rota_id', $rota_id);
+            $query->where('rota_id', $rota_id)->orderBy('data_venda');
         })
         ->paginate($limit);
     
