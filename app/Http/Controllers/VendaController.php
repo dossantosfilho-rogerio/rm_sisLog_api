@@ -26,7 +26,7 @@ class VendaController extends Controller
         })->when($rota_id, function($query) use ($rota_id){
             $query->where('rota_id', $rota_id)->orderBy('data_venda');
         })
-        ->paginate($limit);
+        ->get();
     
         return response()->json($vendas);
     }
