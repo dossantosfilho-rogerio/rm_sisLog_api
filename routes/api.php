@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/createCategoria', [CategoriaController::class, 'createCategoria']);
     Route::post('/createRota', [RotaController::class, 'createRota']);
     Route::post('/updateRota', [RotaController::class, 'updateRota']);
-
+    Route::post('/baixarContaAReceber', [ContasAReceberController::class, 'baixarContaAReceber']);       
     Route::post('/createVenda', [VendaController::class, 'createVenda']);
 
     Route::get('/existVenda', [VendaController::class, 'existVenda']);
