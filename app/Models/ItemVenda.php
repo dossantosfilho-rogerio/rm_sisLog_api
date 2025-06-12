@@ -41,9 +41,17 @@ class ItemVenda extends Model
             MovimentacaoEstoque::create([
                 'produto_id' => $itemVenda->produto_id,
                 'quantidade' => $itemVenda->quantidade,
+                'item_venda_id' => $itemVenda->id,
                 'tipo' => MovimentacaoEstoque::TIPO_SAIDA
             ]);
         });
+        static::deleting(function ($itemVenda) {
 
+            $venda = Venda::findOrFail($itemVenda->venda_id);
+            $venda->update(['total' => $venda->total -= $itemVenda->total]);
+
+            $movimentacao = MovimentacaoEstoque::where('item_venda_id', $itemVenda->id)->first();
+            $movimentacao->delete();
+        });
     }
 }

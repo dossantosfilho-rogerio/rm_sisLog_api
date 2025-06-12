@@ -31,6 +31,22 @@ class VendaController extends Controller
         return response()->json($vendas);
     }
 
+
+    public function getVenda(Request $request)
+    {
+        try{
+            $id = $request->input("id");
+
+            $venda = Venda::with(['vendedor', 'rota', 'cliente', 'contaAReceber', 'itensVenda', 'itensVenda.produto'])
+            ->findOrFail($id);
+            return response()->json($venda);
+
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+
     public function existVenda(Request $request)
     {
         $numero_documento = $request->input("numero_documento");
@@ -90,6 +106,67 @@ class VendaController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
             return response()->json(['Erro ao cadastrar a venda.' . $e->getMessage()], 400);
+        }
+    }
+
+
+    public function createItemVenda(Request $request){
+        try{
+            DB::beginTransaction();
+            $idVenda = $request->input('params.idPedidoVenda');
+            $produto = $request->input('params.produto');
+            $produto['venda_id'] = $idVenda;
+            $produto = ItemVenda::create([
+                    'venda_id' => $idVenda,
+                    'produto_id' => $produto['produto_id'],
+                    'preco_unitario' => $produto['preco_unitario'],
+                    'quantidade' => $produto['quantidade'],
+                    'percentual_comissao' => Produto::findOrFail($produto['produto_id'])->percentual_comissao
+                ]);
+            
+            DB::commit();
+           
+            return response()->json($produto);
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+
+     public function deleteItemVenda(Request $request){
+        try{
+            DB::beginTransaction();
+            $idItemVenda = $request->input('params.id');
+            $ItemVenda = ItemVenda::findOrFail($idItemVenda);
+            $ItemVenda->delete();
+            DB::commit();
+           
+            return response()->json($ItemVenda);
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+
+    public function updateVenda(Request $request){
+        try{
+            $id = $request->get('id');
+            $venda = Venda::findOrFail($id);
+            $venda->update([
+                'cliente_id' => $request->get('cliente_id'),
+                'vendedor_id' => $request->get('vendedor_id'),
+                'rota_id' => $request->get('rota_id'),
+                'numero_documento' => $request->get('numero_documento'),
+                'data_venda' => $request->get('data_venda'),
+            ]);
+            
+           
+            return response()->json($venda);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response()->json(['Erro ao atualizar a venda.' . $e->getMessage()], 400);
         }
     }
 

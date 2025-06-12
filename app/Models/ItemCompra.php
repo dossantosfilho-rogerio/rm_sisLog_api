@@ -41,9 +41,15 @@ class ItemCompra extends Model
                 [
                     'produto_id' => $itemCompra->produto_id,
                     'quantidade' => $itemCompra->quantidade,
+                    'item_compra_id' => $itemCompra->id,
                     'tipo' => MovimentacaoEstoque::TIPO_ENTRADA
                 ]
                 );
+        });
+
+        static::deleted(function ($itemCompra) {
+            $movimentacao = MovimentacaoEstoque::where('item_compra_id', $itemCompra->id)->first();
+            $movimentacao->delete();
         });
     }
 

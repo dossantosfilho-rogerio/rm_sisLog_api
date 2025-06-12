@@ -48,6 +48,16 @@ class MovimentacaoEstoque extends Model
             }
             $produto->save();
         });
+
+        static::deleted(function ($movimentacao) {
+            $produto = Produto::findOrFail($movimentacao->produto_id);
+            if($movimentacao->tipo == self::TIPO_ENTRADA) {
+                $produto->estoque -= $movimentacao->quantidade;
+            } else if($movimentacao->tipo == self::TIPO_SAIDA) {
+                $produto->estoque += $movimentacao->quantidade;
+            }
+            $produto->save();
+        });
     }
 
     const TIPO_ENTRADA = 'entrada';

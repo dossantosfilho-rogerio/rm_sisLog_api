@@ -27,7 +27,7 @@ class Venda extends Model
     // Relacionamento de muitos para um com Funcionario
     public function vendedor()
     {
-        return $this->belongsTo(Pessoa::class, 'id', 'vendedor_id');
+        return $this->belongsTo(Pessoa::class, 'vendedor_id', 'id');
     }
 
     public function rota()

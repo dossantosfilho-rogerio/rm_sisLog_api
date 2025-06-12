@@ -27,14 +27,22 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/createRota', [RotaController::class, 'createRota']);
     Route::post('/updateRota', [RotaController::class, 'updateRota']);
     Route::post('/baixarContaAReceber', [ContasAReceberController::class, 'baixarContaAReceber']);       
+    Route::post('/createContaAReceber', [ContasAReceberController::class, 'createContaAReceber']);       
+    Route::post('/createItemVenda', [VendaController::class, 'createItemVenda']);       
     Route::post('/createVenda', [VendaController::class, 'createVenda']);
+    Route::post('/updateVenda', [VendaController::class, 'updateVenda']);
+
+    Route::post('/deleteContaAReceber', [ContasAReceberController::class, 'deleteContaAReceber']);
+    Route::post('/deleteItemVenda', [VendaController::class, 'deleteItemVenda']);
 
     Route::get('/existVenda', [VendaController::class, 'existVenda']);
     Route::get('/existCompra', [CompraController::class, 'existCompra']);
 
+    Route::get('/getRota', [RotaController::class, 'getRota']);
+    Route::get('/getVenda', [VendaController::class, 'getVenda']);
+
     Route::get('/listVendas', [VendaController::class, 'listVendas']);
     Route::get('/listRotas', [RotaController::class, 'listRotas']);
-    Route::get('/getRota', [RotaController::class, 'getRota']);
     Route::get('/listRotasSelect', [RotaController::class, 'listRotasSelect']);
     Route::get('/listProdutos', [ProdutoController::class, 'listProdutos']);
     Route::get('/listProdutosSelect', [ProdutoController::class, 'listProdutosSelect']);
@@ -42,6 +50,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/listPessoas', [PessoaController::class, 'listPessoas']);
     Route::get('/listCategorias', [CategoriaController::class, 'listCategorias']);
     Route::get('/listCategoriasSelect', [CategoriaController::class, 'listCategoriasSelect']);
-    Route::get('/listContasAReceberAbertos', [ContasAReceberController::class, 'listContasAReceberAbertos']);
+    Route::get('/listContasAReceber', [ContasAReceberController::class, 'listContasAReceber']);
 
 });
