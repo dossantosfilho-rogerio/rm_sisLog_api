@@ -35,6 +35,21 @@ class ProdutoController extends Controller
         return response()->json($produtos);
     }
 
+
+    public function getProduto(Request $request)
+    {
+        try{
+            $id = $request->input("id");
+            
+            $rota = Produto::with('categoria')->findOrFail($id);
+        
+            return response()->json($rota);
+
+        } catch (Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
     public function createProduto(Request $request){
         try{
             $inputs = $request->all();
@@ -42,6 +57,18 @@ class ProdutoController extends Controller
             return response()->json($pessoa);
         } catch (Exception $e) {
             return response()->json(['Erro ao cadastrar o produto.'. $e->getMessage()], 400);
+        }
+    }
+
+    public function updateProduto(Request $request){
+        try{
+            $inputs = $request->all();
+            $id = $inputs['id'];
+            unset($inputs['id']);
+            $produto = Produto::updateOrCreate(['id'=>$id], $inputs);
+            return response()->json($produto);
+        } catch (Exception $e) {
+            return response()->json(['Erro ao atualizar a produto.'. $e->getMessage()], 400);
         }
     }
 

@@ -17,15 +17,18 @@ class VendaController extends Controller
     {
         $limit = $request->input("limit",9);
         $numero_documento = $request->input("numero_documento");
-        $fornecedor_id = $request->input("fornecedor_id");
+        $cliente_id = $request->input("cliente_id");
         $rota_id = $request->input("rota_id");
 
         $vendas = Venda::with('cliente:id,nome','itensVenda:id,venda_id,produto_id,quantidade,total,preco_unitario', 'itensVenda.produto:id,nome')
         ->when($numero_documento, function ($query) use ($numero_documento) {
             $query->where('numero_documento', 'LIKE', '%'.$numero_documento.'%');
         })->when($rota_id, function($query) use ($rota_id){
-            $query->where('rota_id', $rota_id)->orderBy('data_venda');
+            $query->where('rota_id', $rota_id);
+        })->when($cliente_id, function($query) use ($cliente_id){
+            $query->where('cliente_id', $cliente_id);
         })
+        ->orderBy('data_venda', 'DESC')
         ->get();
     
         return response()->json($vendas);
