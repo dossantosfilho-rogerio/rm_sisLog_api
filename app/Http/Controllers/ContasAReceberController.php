@@ -15,7 +15,13 @@ class ContasAReceberController extends Controller
     public function listContasAReceber(Request $request)
     {
         $limit = $request->get('limit', 9);
+        $numero_documento = $request->get('numero_documento');
         $contasareceber = ContaAReceber::with('venda:id,cliente_id,numero_documento')->with('venda.cliente:id,nome')
+        ->when($numero_documento, function($query) use ($numero_documento) {
+            $query->whereHas('venda', function($query) use ($numero_documento){
+                $query->whereLike('numero_documento', $numero_documento);
+            });
+        })
         ->orderBy('data_vencimento', 'ASC')
         ->get();
         return response()->json($contasareceber);
