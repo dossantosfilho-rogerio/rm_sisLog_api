@@ -73,5 +73,19 @@ class CompraController extends Controller
         //return response()->json($compra);
     }
 
+    public function getCompra(Request $request)
+    {
+        try{
+            $id = $request->input("id");
+            
+            $compra = Compra::with(['pessoa', 'itensCompra', 'itensCompra.produto'])->findOrFail($id); // Retorna $limit produtos por página
+        
+            return response()->json($compra);
+
+        } catch (Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
 
 }

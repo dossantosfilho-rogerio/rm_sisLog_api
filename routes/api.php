@@ -40,6 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/existCompra', [CompraController::class, 'existCompra']);
 
     Route::get('/getProduto', [ProdutoController::class, 'getProduto']);
+    Route::get('/getCompra', [CompraController::class, 'getCompra']);
     Route::get('/getRota', [RotaController::class, 'getRota']);
     Route::get('/getVenda', [VendaController::class, 'getVenda']);
 
