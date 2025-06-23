@@ -20,7 +20,7 @@ class VendaController extends Controller
         $cliente_id = $request->input("cliente_id");
         $rota_id = $request->input("rota_id");
 
-        $vendas = Venda::with('cliente:id,nome','itensVenda:id,venda_id,produto_id,quantidade,total,preco_unitario', 'itensVenda.produto:id,nome')
+        $vendas = Venda::with('cliente:id,nome','itensVenda:id,venda_id,produto_id,quantidade,total,preco_unitario', 'itensVenda.produto:id,nome', 'rota')
         ->when($numero_documento, function ($query) use ($numero_documento) {
             $query->where('numero_documento', 'LIKE', '%'.$numero_documento.'%');
         })->when($rota_id, function($query) use ($rota_id){

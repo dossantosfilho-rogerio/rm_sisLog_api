@@ -32,7 +32,7 @@ class Venda extends Model
 
     public function rota()
     {
-        return $this->belongsTo(Rota::class);
+        return $this->belongsTo(Rota::class, 'rota_id', 'id');
     }
 
 

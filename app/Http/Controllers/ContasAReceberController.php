@@ -55,9 +55,24 @@ class ContasAReceberController extends Controller
     {
         try{
             $id = $request->input('params.id');
+            $valor_pago = $request->input('params.valor');
             DB::beginTransaction();
             $contaareceber = ContaAReceber::whereNot('status', ContaAReceber::STATUS_PAGO)->findOrFail($id);
-            $contaareceber->update(['status' => ContaAReceber::STATUS_PAGO]);
+            if($valor_pago < $contaareceber->valor){
+                $novaConta = new ContaAReceber();
+                $novaConta->valor = $contaareceber->valor - $valor_pago;
+                $novaConta->venda_id = $contaareceber->venda_id;
+                $novaConta->data_vencimento = $contaareceber->data_vencimento;
+                if(strtotime($novaConta->data_vencimento) > strtotime(date('Y-m-d'))){
+                    $novaConta->status = contaareceber::STATUS_PENDENTE;
+                } else {
+                    $novaConta->status = contaareceber::STATUS_VENCIDO;
+                }
+                $novaConta->save();
+                $contaareceber->valor = $valor_pago;
+            }
+            $contaareceber->status = ContaAReceber::STATUS_PAGO;
+            $contaareceber->save();
 
             $pagamento = new Pagamento();
             $pagamento->contas_a_receber_id = $contaareceber->id;

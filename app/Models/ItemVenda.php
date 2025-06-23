@@ -38,6 +38,10 @@ class ItemVenda extends Model
         });
 
         static::created(function ($itemVenda) {
+            $venda = Venda::findOrFail($itemVenda->venda_id);
+            $venda->update(['total' => $venda->total += $itemVenda->total]);
+
+            
             MovimentacaoEstoque::create([
                 'produto_id' => $itemVenda->produto_id,
                 'quantidade' => $itemVenda->quantidade,
