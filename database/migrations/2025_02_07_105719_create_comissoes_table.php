@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->foreignId('vendedor_id')->constrained('pessoas')->restrictOnDelete();
             $table->foreignId('item_venda_id')->constrained('itens_venda')->onDelete('cascade');
             $table->foreignId('conta_a_receber_id')->constrained('contas_a_receber')->onDelete('cascade');
+            $table->foreignId('pagamento_id')->constrained('pagamentos')->onDelete('cascade');            
             $table->decimal( 'percentual_comissao', 5, 2);
             $table->decimal('valor', 10, 2);
             $table->timestamps();

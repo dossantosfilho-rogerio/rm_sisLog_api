@@ -15,10 +15,23 @@ class Pagamento extends Model
         'tipo',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($pagamento) {
+            $pagamento->load('contaAReceber');
+            if ($pagamento->contaAReceber->status === ContaAReceber::STATUS_PAGO) {
+                Comissao::gerarComissao($pagamento);
+            }
+        });
+    
+    }
+
     // Relacionamento de muitos para um com contas a receber
     public function contaAReceber()
     {
-        return $this->belongsTo(ContaAReceber::class);
+        return $this->belongsTo(ContaAReceber::class, 'contas_a_receber_id');
     }
 
     public static function getAllTipos(){
