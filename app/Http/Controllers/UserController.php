@@ -28,6 +28,22 @@ class UserController extends Controller
         ]);
     }
 
+    public function createUser(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'cpf' => 'required',
+            'password' => 'required',
+        ]);
+
+        
+        $inputs = $request->all();
+        $inputs['password'] = Hash::make($inputs['password']);
+        $user = User::create($inputs);
+
+        return response()->json($user);
+    }
+
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();

@@ -20,6 +20,7 @@ Route::get('/ping', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     // Rota para logout (revogar o token)
     Route::post('/logout', [UserController::class, 'logout']);
+    Route::post('/createUser', [UserController::class, 'createUser']);
     Route::post('/createCompra', [CompraController::class, 'createCompra']);
     Route::post('/createPessoa', [PessoaController::class, 'createPessoa']);
     Route::post('/createProduto', [ProdutoController::class, 'createProduto']);
