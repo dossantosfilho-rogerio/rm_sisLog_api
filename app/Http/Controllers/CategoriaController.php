@@ -52,7 +52,7 @@ class CategoriaController extends Controller
         try{
             $id = $request->input("id");
             
-            $rota = Categoria::with('Produto')->findOrFail($id);
+            $rota = Categoria::with('produtos')->findOrFail($id);
         
             return response()->json($rota);
 
