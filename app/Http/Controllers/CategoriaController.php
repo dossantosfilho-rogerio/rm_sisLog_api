@@ -47,4 +47,18 @@ class CategoriaController extends Controller
         }
     }
 
+     public function getCategoria(Request $request)
+    {
+        try{
+            $id = $request->input("id");
+            
+            $rota = Categoria::with('Produto')->findOrFail($id);
+        
+            return response()->json($rota);
+
+        } catch (Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
 }
